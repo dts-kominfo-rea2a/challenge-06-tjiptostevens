@@ -22,7 +22,10 @@ let modifyFile3 = (val) => {
 let array = [];
 let err = null;
 const bacaData = (fnCallback) => {
-    let fileArray = [file1, file2, file3];
+    let fileArray = [];
+    fileArray.push(file1);
+    fileArray.push(file2);
+    fileArray.push(file3);
     readJsonFile(fileArray, array);
     setTimeout(() => {
         return fnCallback(err, array);
