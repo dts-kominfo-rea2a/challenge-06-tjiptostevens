@@ -22,6 +22,8 @@ let modifyFile3 = (val) => {
 let fileArray = [];
 let err = null;
 const bacaData = (fnCallback) => {
+    fileArray = [];
+    err = null;
     readJsonFile(file1, fileArray);
     readJsonFile(file2, fileArray);
     readJsonFile(file3, fileArray);
