@@ -19,35 +19,36 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
-let fileArray = [];
+let array = [];
 let err = null;
 const bacaData = (fnCallback) => {
-    readJsonFile(file1, fileArray, 1);
-    readJsonFile(file2, fileArray, 2);
-    readJsonFile(file3, fileArray, 3);
+    let fileArray = [file1, file2, file3];
+    readJsonFile(fileArray, array);
     setTimeout(() => {
-        return fnCallback(err, fileArray);
+        return fnCallback(err, array);
     }, 10);
 };
 
 // Read JSON File Fuction
-const readJsonFile = (jsonFile, array, index) => {
-    let i = index - 1;
-    fs.readFile(jsonFile, { encoding: "utf8" }, (error, data) => {
-        if (error) {
-            err = error;
-            return err;
-        } else {
-            let res = JSON.parse(data);
-            let dat = findMessage(res);
-            let datArray = dat.split(" ");
-            datArray = datArray[1];
-            console.log(i);
-            array[i] = datArray;
-            // array.push(datArray);
-            return datArray;
-        }
-    });
+const readJsonFile = (jsonFile, array) => {
+    // Loop array of file
+    for (let i = 0; i < jsonFile.length; i++) {
+        // readFile start here
+        fs.readFile(jsonFile[i], { encoding: "utf8" }, (error, data) => {
+            if (error) {
+                err = error;
+                return err;
+            } else {
+                let res = JSON.parse(data);
+                let dat = findMessage(res);
+                let datArray = dat.split(" ");
+                datArray = datArray[1];
+                array[i] = datArray;
+                // array.push(datArray);
+                return datArray;
+            }
+        });
+    }
 };
 
 // find key message on JSON object
