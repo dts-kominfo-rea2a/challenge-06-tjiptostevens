@@ -22,18 +22,17 @@ let modifyFile3 = (val) => {
 let fileArray = [];
 let err = null;
 const bacaData = (fnCallback) => {
-    fileArray = [];
-    err = null;
-    readJsonFile(file1, fileArray);
-    readJsonFile(file2, fileArray);
-    readJsonFile(file3, fileArray);
+    readJsonFile(file1, fileArray, 1);
+    readJsonFile(file2, fileArray, 2);
+    readJsonFile(file3, fileArray, 3);
     setTimeout(() => {
         return fnCallback(err, fileArray);
     }, 10);
 };
 
 // Read JSON File Fuction
-const readJsonFile = (jsonFile, array) => {
+const readJsonFile = (jsonFile, array, index) => {
+    let i = index - 1;
     fs.readFile(jsonFile, { encoding: "utf8" }, (error, data) => {
         if (error) {
             err = error;
@@ -43,7 +42,9 @@ const readJsonFile = (jsonFile, array) => {
             let dat = findMessage(res);
             let datArray = dat.split(" ");
             datArray = datArray[1];
-            array.push(datArray);
+            console.log(i);
+            array[i] = datArray;
+            // array.push(datArray);
             return datArray;
         }
     });
