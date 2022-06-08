@@ -19,32 +19,28 @@ let modifyFile3 = (val) => {
 
 // TODO: Kerjakan bacaData
 // gunakan variabel file1, file2, dan file3
+let fileArray = [];
+let err = null;
 const bacaData = (fnCallback) => {
+    readJsonFile(file1, fileArray);
+    readJsonFile(file2, fileArray);
+    readJsonFile(file3, fileArray);
     setTimeout(() => {
-        let fileArray = [];
-        let err = "";
-
-        readJsonFile(file1, fileArray);
-        readJsonFile(file2, fileArray);
-        readJsonFile(file3, fileArray);
-
         return fnCallback(err, fileArray);
-    }, 0);
+    }, 10);
 };
 
+// Read JSON File Fuction
 const readJsonFile = (jsonFile, array) => {
     fs.readFile(jsonFile, { encoding: "utf8" }, (error, data) => {
         if (error) {
-            return console.log(error);
+            err = error;
         } else {
             let res = JSON.parse(data);
             let dat = findMessage(res);
             let datArray = dat.split(" ");
             datArray = datArray[1];
-            // console.log("read", error, datArray);
             array.push(datArray);
-            // console.log(array);
-            return datArray;
         }
     });
 };
