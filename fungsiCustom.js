@@ -35,12 +35,14 @@ const readJsonFile = (jsonFile, array) => {
     fs.readFile(jsonFile, { encoding: "utf8" }, (error, data) => {
         if (error) {
             err = error;
+            return err;
         } else {
             let res = JSON.parse(data);
             let dat = findMessage(res);
             let datArray = dat.split(" ");
             datArray = datArray[1];
             array.push(datArray);
+            return datArray;
         }
     });
 };
